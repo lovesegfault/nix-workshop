@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "hello-poetry"
+version=  "0.1.0"
+description = "Poetry + Nix Demo"
+authors = [ "Bernardo Meurer <beme@google.com>" ]
+
+[tool.poetry.scripts]
+hello-poetry = "hello_poetry:main"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+[tool.poetry.dev-dependencies]
+pytest = "6.2.5"
+black = "22.6.0"
+isort = "5.10.1"
+mypy = "0.961"
+
+[tool.black]
+line_length = 100
+
+[tool.pytest.ini_options]
+addopts = "-v -Wdefault"
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 100
+
+[build-system]
+requires = [ "poetry" ]
+build-backend = "poetry.masonry.api"
