@@ -20,8 +20,6 @@
     in
     flake-utils.lib.eachSystem supportedSystems (system:
       let
-        system = "aarch64-darwin";
-
         pkgs = import nixpkgs {
           inherit system;
           overlays = [
