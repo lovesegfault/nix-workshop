@@ -59,6 +59,8 @@
             ++ (lib.attrValues self.checks.${system});
 
           nativeBuildInputs = with pkgs; [
+            # GHA
+            act
             # C
             clang-tools
             cppcheck
