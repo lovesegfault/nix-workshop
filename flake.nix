@@ -53,7 +53,7 @@
             runtimeInputs = lib.attrValues helloPkgs;
             text = lib.concatStringsSep "\n" (map lib.getExe (lib.attrValues helloPkgs));
           };
-          docker-image = pkgs.dockerTools.buildImage {
+          hello-docker = pkgs.dockerTools.buildImage {
             name = "hello-docker";
             contents = [ self.packages.${system}.default ];
             config.Cmd = [ "/bin/hello-all" ];

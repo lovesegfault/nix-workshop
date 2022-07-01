@@ -75,9 +75,7 @@ jobs:
         run: |
           SYSTEM="$(nix eval --impure --expr 'builtins.currentSystem')"
           cachix watch-exec nix-workshop -- \
-          nix build -L --keep-going \
-            .\#packages."$SYSTEM".default \
-            .\#packages."$SYSTEM".docker-image
+          nix build -L --keep-going .\#packages."$SYSTEM".default
   run-docker:
     runs-on: ubuntu-latest
     steps:
@@ -91,11 +89,11 @@ jobs:
         with:
           name: nix-workshop
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-      - name: build-packages
+      - name: run-docker
         run: |
           SYSTEM="$(nix eval --impure --expr 'builtins.currentSystem')"
           cachix watch-exec nix-workshop -- \
-          nix build -L --keep-going .\#packages."$SYSTEM".docker-image
+          nix build -L --keep-going .\#packages."$SYSTEM".hello-docker
           docker load -i result | cut -f 2- -d ':' | xargs docker run
   check-all:
     runs-on: ubuntu-latest
