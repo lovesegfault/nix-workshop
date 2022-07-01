@@ -78,3 +78,14 @@ jobs:
           nix build -L --keep-going \
             .\#packages."$SYSTEM".default \
             .\#packages."$SYSTEM".docker-image
+  check-all:
+    runs-on: ubuntu-latest
+    if: always()
+    needs:
+      - flake-check
+      - build-shell
+      - build-packages
+    steps:
+      - uses: re-actors/alls-green@v1.1.0
+        with:
+          jobs: ${{ toJSON(needs) }}
