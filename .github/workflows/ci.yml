@@ -78,6 +78,25 @@ jobs:
           nix build -L --keep-going \
             .\#packages."$SYSTEM".default \
             .\#packages."$SYSTEM".docker-image
+  run-docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cachix/install-nix-action@v17
+        with:
+          extra_nix_config: |
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+            experimental-features = nix-command flakes
+      - uses: cachix/cachix-action@v10
+        with:
+          name: nix-workshop
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+      - name: build-packages
+        run: |
+          SYSTEM="$(nix eval --impure --expr 'builtins.currentSystem')"
+          cachix watch-exec nix-workshop -- \
+          nix build -L --keep-going .\#packages."$SYSTEM".docker-image
+          docker load -i result | cut -f 2- -d ':' | xargs docker run
   check-all:
     runs-on: ubuntu-latest
     if: always()
@@ -85,6 +104,7 @@ jobs:
       - flake-check
       - build-shell
       - build-packages
+      - run-docker
     steps:
       - uses: re-actors/alls-green@v1.1.0
         with:
