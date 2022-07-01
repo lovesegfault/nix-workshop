@@ -6,6 +6,6 @@ setup(name = "hello_setuptools",
       author = "Bernardo Meurer <beme@google.com>",
       packages = ["hello_setuptools"],
       entry_points = {
-        "console_scripts": [ "hello-setuptools=hello_setuptools:main" ]
+        "console_scripts": [ "hello_setuptools=hello_setuptools:main" ]
       },
 )
