@@ -30,6 +30,7 @@
 
         helloPkgs = {
           hello-c = pkgs.callPackage ./hello-c { };
+          hello-cobol = pkgs.callPackage ./hello-cobol { };
           hello-go = pkgs.callPackage ./hello-go { };
           hello-poetry = pkgs.callPackage ./hello-poetry { };
           hello-rust = pkgs.callPackage ./hello-rust { };
