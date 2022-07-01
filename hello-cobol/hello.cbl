@@ -17,7 +17,7 @@
          ACCEPT Name FROM ARGUMENT-VALUE
        END-IF
 
-       DISPLAY "Hello " FUNCTION TRIM(Name) "!".
+       DISPLAY "Hello, " FUNCTION TRIM(Name) "!".
 
        EXIT PROGRAM.
 
