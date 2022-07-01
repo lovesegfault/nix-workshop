@@ -68,25 +68,6 @@ jobs:
       - name: build-packages
         run: |
           SYSTEM="$(nix eval --impure --expr 'builtins.currentSystem')"
-          nix build -L .\#packages."$SYSTEM".default
-  build-images:
-    runs-on: ${{ matrix.system }}
-    strategy:
-      matrix:
-        system:
-          - macos-latest
-          - ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v17
-        with:
-          extra_nix_config: |
-            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-            experimental-features = nix-command flakes
-      - uses: cachix/cachix-action@v10
-        with:
-          name: nix-community
-      - name: build-packages
-        run: |
-          SYSTEM="$(nix eval --impure --expr 'builtins.currentSystem')"
-          nix build -L .\#dockerImages."$SYSTEM".default
+          nix build -L \
+            .\#packages."$SYSTEM".default \
+            .\#packages."$SYSTEM".docker-image
