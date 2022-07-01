@@ -28,29 +28,31 @@
         };
         inherit (pkgs) lib;
 
-        helloPkgs = lib.filterAttrs (n: _: lib.hasPrefix "hello-" n) self.packages.${system};
+        helloPkgs = {
+          hello-c = pkgs.callPackage ./hello-c { };
+          hello-go = pkgs.callPackage ./hello-go { };
+          hello-poetry = pkgs.callPackage ./hello-poetry { };
+          hello-rust = pkgs.callPackage ./hello-rust { };
+          hello-setuptools = pkgs.python3Packages.callPackage ./hello-setuptools { };
+        };
       in
       {
         packages = {
           default = pkgs.symlinkJoin {
             name = "nix-workshop";
-            paths = lib.attrValues helloPkgs;
+            paths = [ self.packages.${system}.hello-all ] ++ (lib.attrValues helloPkgs);
           };
-          hello-c = pkgs.callPackage ./hello-c { };
-          hello-poetry = pkgs.callPackage ./hello-poetry { };
-          hello-rust = pkgs.callPackage ./hello-rust { };
-          hello-go = pkgs.callPackage ./hello-go { };
-          hello-setuptools = pkgs.python3Packages.callPackage ./hello-setuptools { };
+          hello-all = pkgs.writeShellApplication {
+            name = "hello-all";
+            runtimeInputs = lib.attrValues helloPkgs;
+            text = lib.concatStringsSep "\n" (lib.attrNames helloPkgs);
+          };
           docker-image = pkgs.dockerTools.buildImage {
             name = "hello-docker";
-            contents = lib.attrValues helloPkgs;
-            config.Cmd =
-              let
-                runner = lib.concatMapStringsSep " && " (n: "/bin/${n}") (lib.attrNames helloPkgs);
-              in
-              [ runner ];
+            contents = [ self.packages.${system}.default ];
+            config.Cmd = [ "/bin/hello-all" ];
           };
-        };
+        } // helloPkgs;
 
         devShells.default = pkgs.mkShell {
           name = "nix-workshop";
