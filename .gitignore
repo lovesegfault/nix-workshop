@@ -1,5 +1,11 @@
+*~
+,*
+.*.swp
+.*.swo
+.DS_Store
 ### Nix ###
 *.drv
 .direnv
 result
 result-*
+/.pre-commit-config.yaml
