@@ -37,6 +37,11 @@
         };
       in
       {
+        apps = { default = self.apps.${system}.hello-all; }
+          // lib.mapAttrs
+          (_: v: { type = "app"; program = lib.getExe v; })
+          (helloPkgs // { inherit (self.packages.${system}) hello-all; });
+
         packages = {
           default = pkgs.symlinkJoin {
             name = "nix-workshop";
