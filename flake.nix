@@ -45,7 +45,7 @@
           hello-all = pkgs.writeShellApplication {
             name = "hello-all";
             runtimeInputs = lib.attrValues helloPkgs;
-            text = lib.concatStringsSep "\n" (lib.attrNames helloPkgs);
+            text = lib.concatStringsSep "\n" (map lib.getExe (lib.attrValues helloPkgs));
           };
           docker-image = pkgs.dockerTools.buildImage {
             name = "hello-docker";
