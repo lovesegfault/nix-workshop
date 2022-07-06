@@ -29,6 +29,7 @@
         inherit (pkgs) lib;
 
         helloPkgs = {
+          hello-apl = pkgs.callPackage ./hello-apl { };
           hello-c = pkgs.callPackage ./hello-c { };
           hello-cobol = pkgs.callPackage ./hello-cobol { };
           hello-go = pkgs.callPackage ./hello-go { };
@@ -83,6 +84,8 @@
             cargo-edit
             cargo-fuzz
             rust-analyzer
+            # APL
+            gnuapl
             # Shell
             shellcheck
             shfmt
