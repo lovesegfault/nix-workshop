@@ -6,7 +6,7 @@ stdenv.mkDerivation {
 
   buildInputs = [ gnuapl ];
 
-  dontPatchShebangs = 1;
+  dontPatchShebangs = true;
 
   # Optimization for single-script files.
   unpackPhase = ":";
