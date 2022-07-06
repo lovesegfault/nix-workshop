@@ -84,8 +84,6 @@
             cargo-edit
             cargo-fuzz
             rust-analyzer
-            # APL
-            gnuapl
             # Shell
             shellcheck
             shfmt
