@@ -23,3 +23,4 @@ If you need any help, you can open an issue here, or reach out to @lovesegfault.
 * Python (poetry)
 * Python (setuptools)
 * Rust
+* Shell
