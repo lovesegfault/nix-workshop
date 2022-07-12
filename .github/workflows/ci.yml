@@ -27,7 +27,7 @@ jobs:
         run: nix-instantiate --json --parse ./**/*.nix
       - name: flake-check
         run: |
-          cachix watch-exec nix-workshop -- \
+          [ '${{ github.ref }}' == 'refs/heads/main' ] && cachix watch-store nix-workshop &
           nix flake check -L
   build-shell:
     runs-on: ${{ matrix.system }}
@@ -50,7 +50,7 @@ jobs:
       - name: build-shell
         run: |
           SYSTEM="$(nix eval --impure --expr 'builtins.currentSystem')"
-          cachix watch-exec nix-workshop -- \
+          [ '${{ github.ref }}' == 'refs/heads/main' ] && cachix watch-store nix-workshop &
           nix build -L --keep-going \
             .\#devShells."$SYSTEM".default.inputDerivation
   build-packages:
@@ -74,7 +74,7 @@ jobs:
       - name: build-packages
         run: |
           SYSTEM="$(nix eval --impure --expr 'builtins.currentSystem')"
-          cachix watch-exec nix-workshop -- \
+          [ '${{ github.ref }}' == 'refs/heads/main' ] && cachix watch-store nix-workshop &
           nix build -L --keep-going .\#packages."$SYSTEM".default
   run-docker:
     runs-on: ubuntu-latest
@@ -92,7 +92,7 @@ jobs:
       - name: run-docker
         run: |
           SYSTEM="$(nix eval --impure --expr 'builtins.currentSystem')"
-          cachix watch-exec nix-workshop -- \
+          [ '${{ github.ref }}' == 'refs/heads/main' ] && cachix watch-store nix-workshop &
           nix build -L --keep-going .\#packages."$SYSTEM".hello-docker
           docker load -i result | cut -f 2- -d ':' | xargs docker run
   check-all:
