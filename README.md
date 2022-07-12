@@ -5,6 +5,15 @@ programming language with Nix.
 
 Please contribute your language of choice!
 
+## Languages
+
+* [C](./hello-c)
+* [Cobol](./hello-cobol)
+* [Go](./hello-go)
+* [Python (poetry)](./hello-poetry)
+* [Python (setuptools)](./hello-setuptools)
+* [Rust](./hello-rust)
+
 ## Usage
 
 ### Building
@@ -105,12 +114,3 @@ Hello, Setuptools world!
 5. Update the README list
 
 If you need any help, you can open an issue here, or reach out to @lovesegfault.
-
-## Languages
-
-* C
-* Cobol
-* Go
-* Python (poetry)
-* Python (setuptools)
-* Rust
