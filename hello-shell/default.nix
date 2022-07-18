@@ -5,14 +5,14 @@
 #
 # <https://nixos.org/manual/nixpkgs/stable/#trivial-builder-writeShellApplication>
 
-{writeShellApplication}:
+{ writeShellApplication }:
 
 writeShellApplication {
-    name = "hello-shell";
+  name = "hello-shell";
 
-    runtimeInputs = [];
+  runtimeInputs = [ ];
 
-    text = ''
-      echo Hello, shell world!
-    '';
+  text = ''
+    echo Hello, shell world!
+  '';
 }
