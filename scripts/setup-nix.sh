@@ -3,7 +3,7 @@
 set -euo pipefail
 
 KEY="$(dirname "$0")/release-key.gpg"
-VERSION="${VERSION:=2.9.1}"
+VERSION="${VERSION:=2.10.3}"
 CHECK_SIGNATURE=true
 
 if ! command -v gpg &>/dev/null; then
