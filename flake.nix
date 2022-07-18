@@ -34,6 +34,7 @@
           hello-go = pkgs.callPackage ./hello-go { };
           hello-poetry = pkgs.callPackage ./hello-poetry { };
           hello-rust = pkgs.callPackage ./hello-rust { };
+          hello-shell = pkgs.callPackage ./hello-shell { };
           hello-setuptools = pkgs.python3Packages.callPackage ./hello-setuptools { };
         };
       in

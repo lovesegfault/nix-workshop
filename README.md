@@ -13,6 +13,7 @@ Please contribute your language of choice!
 * [Python (poetry)](./hello-poetry)
 * [Python (setuptools)](./hello-setuptools)
 * [Rust](./hello-rust)
+* [Shell](./hello-shell)
 
 ## Usage
 
@@ -78,15 +79,16 @@ docker-image-hello-docker.tar.gz> Cooking the image...
 docker-image-hello-docker.tar.gz> Finished.
 
 $ docker load -i result
-Loaded image: hello-docker:dn6j5y4fz1w7c92clbc2lv6d9zidwncx
+Loaded image: hello-docker:9qf3i2r0xr790zjrf403b6psmv1xvqr3
 
-$ docker run hello-docker:dn6j5y4fz1w7c92clbc2lv6d9zidwncx
+$ docker run hello-docker:9qf3i2r0xr790zjrf403b6psmv1xvqr3
 Hello, C world!
 Hello, Cobol world!
 Hello, Go World!
 Hello, Poetry world!
 Hello, Rust world!
 Hello, Setuptools world!
+Hello, shell world!
 ```
 
 ### All
@@ -103,6 +105,7 @@ Hello, Go World!
 Hello, Poetry world!
 Hello, Rust world!
 Hello, Setuptools world!
+Hello, shell world!
 ```
 
 ## Contributing
