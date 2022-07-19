@@ -1,4 +1,4 @@
-{ stdenv, gnuapl }:
+{ stdenv, gnuapl, lib }:
 
 stdenv.mkDerivation {
   pname = "hello-apl";
@@ -6,16 +6,18 @@ stdenv.mkDerivation {
 
   buildInputs = [ gnuapl ];
 
+  src = lib.cleanSource ./.;
+
+  makeFlags = [ "PREFIX=${placeholder "out"}" ];
+
   dontPatchShebangs = true;
 
-  # Optimization for single-script files.
-  unpackPhase = ":";
-  installPhase = "install -m755 -D ${./hello.apl} $out/bin/hello-apl";
+  postPatch = ''
+    substituteInPlace ./hello.apl \
+      --replace '/usr/bin/env -S apl' ${gnuapl}/bin/apl
+  '';
+
   checkPhase = ''
-    runHook preCheck
-    substituteInPlace bin/hello-apl \
-      --replace '/usr/bin/env apl' ${gnuapl}/bin/apl
-    bin/hello-apl
-    runHook postCheck
+    $out/bin/hello-apl
   '';
 }
