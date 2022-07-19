@@ -9,3 +9,5 @@
 result
 result-*
 /.pre-commit-config.yaml
+## APL ##
+.apl.history
