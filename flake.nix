@@ -56,7 +56,11 @@
           };
           hello-docker = pkgs.dockerTools.buildImage {
             name = "hello-docker";
-            contents = [ self.packages.${system}.default ];
+            copyToRoot = pkgs.buildEnv {
+              name = "hello-root";
+              paths = [ self.packages.${system}.default ];
+              pathsToLink = [ "/bin" ];
+            };
             config.Cmd = [ "/bin/hello-all" ];
           };
         } // helloPkgs;
