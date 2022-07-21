@@ -6,7 +6,9 @@ stdenv.mkDerivation {
 
   src = lib.cleanSource ./.;
 
-  nativeBuildInputs = [ gnu-cobol ];
+  nativeBuildInputs = [ gnu-cobol.bin gnu-cobol.dev ];
+
+  buildInputs = [ gnu-cobol.lib ];
 
   makeFlags = [ "PREFIX=${placeholder "out"}" ];
 
